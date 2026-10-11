@@ -1,0 +1,52 @@
+# Maven build directory
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ==========================================
+# IDE Specific Files
+# ==========================================
+# IntelliJ IDEA (ignora toda a pasta de configs do projeto)
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# VS Code
+.vscode/
+
+# ==========================================
+# Operating System Files
+# ==========================================
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# Local Runtime Data / Database Files
+# ==========================================
+# Evita subir arquivos de dados gerados ao rodar o projeto
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+data/
+*.json.bak
