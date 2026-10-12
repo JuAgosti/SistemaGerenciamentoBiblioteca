@@ -1,62 +1,62 @@
-
 package br.com.biblioteca;
 
-import br.com.biblioteca.exception.CampoObrigatorioException;
+import br.com.biblioteca.exception.LivroIndisponivelException;
+import br.com.biblioteca.model.Emprestimo;
+import br.com.biblioteca.model.Livro;
 import br.com.biblioteca.model.Usuario;
-import br.com.biblioteca.util.CpfValidator;
+
+import java.time.LocalDate;
 
 public class Main {
 
     public static void main(String[] args) {
-        testarCpf("529.982.247-25");
-        testarCpf("111.111.111-11");
-        testarCpf("529.982.247-24");
-        testarCpf("123");
-        testarCpf("");
-        testarCpf(null);
 
-        testarUsuario();
-    }
+        Livro livro = new Livro(
+                "O Pequeno Príncipe",
+                "Antoine de Saint-Exupéry",
+                "978-8595081512",
+                2015,
+                "Fantasia"
+        );
 
-    private static void testarCpf(String cpf) {
+        Usuario usuario1 = new Usuario(
+                "Maria da Silva",
+                "529.982.247-25",
+                "maria@email.com",
+                "(51) 99999-9999"
+        );
+
+        Usuario usuario2 = new Usuario(
+                "João da Silva",
+                "111.444.777-35",
+                "joao@email.com",
+                "(51) 98888-7777"
+        );
+
         try {
-            String cpfValidado = CpfValidator.validar(cpf);
-
-            System.out.println(
-                    "CPF: " + cpf + " -> VÁLIDO (" + cpfValidado + ")"
+            // Primeiro empréstimo: deve funcionar.
+            Emprestimo emprestimo1 = new Emprestimo(
+                    livro,
+                    usuario1,
+                    LocalDate.now()
             );
 
-        } catch (CampoObrigatorioException e) {
-            System.out.println("CPF: " + cpf
-                    + " -> INVÁLIDO: " + e.getMessage());
+            System.out.println("Primeiro empréstimo realizado!");
+            System.out.println("Livro: " + emprestimo1.getLivro().getTitulo());
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("CPF: " + cpf
-                    + " -> INVÁLIDO: " + e.getMessage());
-        }
-    }
+            // Segundo empréstimo: o livro já está emprestado.
+            System.out.println("\nTentando emprestar o mesmo livro novamente...");
 
-    private static void testarUsuario() {
-        try {
-            Usuario usuario = new Usuario(
-                    "Maria da Silva",
-                    "529.982.247-25",
-                    "maria@email.com",
-                    "(51) 99999-9999"
+            Emprestimo emprestimo2 = new Emprestimo(
+                    livro,
+                    usuario2,
+                    LocalDate.now()
             );
 
-            System.out.println("\n--- Usuário cadastrado ---");
-            System.out.println("ID: " + usuario.getIdUsuario());
-            System.out.println("Nome: " + usuario.getNome());
-            System.out.println("CPF: " + usuario.getCpf());
-            System.out.println("E-mail: " + usuario.getEmail());
-            System.out.println("Telefone: " + usuario.getTelefone());
+            System.out.println("Segundo empréstimo realizado!");
 
-        } catch (CampoObrigatorioException e) {
-            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+        } catch (LivroIndisponivelException e) {
+            System.out.println("\nERRO: " + e.getMessage());
         }
     }
 }
