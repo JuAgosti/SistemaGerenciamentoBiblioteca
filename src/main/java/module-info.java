@@ -1,3 +1,4 @@
+
 module br.com.sgb.sistemagerenciamentobiblioteca {
     requires javafx.controls;
     requires javafx.fxml;
@@ -12,5 +13,4 @@ module br.com.sgb.sistemagerenciamentobiblioteca {
     requires com.almasb.fxgl.all;
 
     opens br.com.biblioteca to javafx.fxml;
-    exports br.com.biblioteca;
 }
