@@ -20,7 +20,7 @@ public class Livro {
         this.autor = ValidacaoUtil.validarCampoObrigatorio(autor, "autor");
         this.isbn = IsbnValidator.validar(isbn);
         this.anoPublicacao = validarAnoPublicacao(anoPublicacao);
-        this.genero = ValidacaoUtil.validarCampoObrigatorio(genero, "genero");
+        this.genero = ValidacaoUtil.validarCampoObrigatorio(genero, "gênero");
         this.statusLivro = StatusEnum.DISPONIVEL;
     }
 
@@ -65,7 +65,7 @@ public class Livro {
     }
 
     public void setGenero(String genero) {
-        this.genero = ValidacaoUtil.validarCampoObrigatorio(genero, "genero");
+        this.genero = ValidacaoUtil.validarCampoObrigatorio(genero, "gênero");
     }
 
     public StatusEnum getStatusLivro() {
@@ -85,10 +85,10 @@ public class Livro {
     }
 
     private int validarAnoPublicacao(int anoPublicacao){
-        int anoAtul = java.time.Year.now().getValue();
+        int anoAtual = java.time.Year.now().getValue();
 
-        if(anoPublicacao <= 0 || anoPublicacao > anoAtul){
-            throw new IllegalArgumentException("O ano de publicação deve estar entre 1 e " + anoAtul + ".");
+        if(anoPublicacao <= 0 || anoPublicacao > anoAtual){
+            throw new IllegalArgumentException("O ano de publicação deve estar entre 1 e " + anoAtual + ".");
         }
         return anoPublicacao;
     }
